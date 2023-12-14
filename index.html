@@ -6,6 +6,24 @@
     <!-- <script src="js/handlebars.js" type="text/javascript"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js" type="text/javascript"></script>
     <script src="js/index.js" type="text/javascript"></script>
+
+    <!-- TODO: add classes to template html tags -->
+    <script id="template" type="text/x-handlebars-template">
+    {{#each data}}
+    <section>
+      <h2>{{title}}</h2>
+      <a href="category.html?id={{id}}" alt="">
+        <img src="{{img_url}}">
+      </a>
+      <ul>
+        {{#each subcategories}}
+        <li><a href="subcategory.html">{{title}}</a></li>
+        {{/each}}
+      </ul>
+    </section>
+    {{/each}}
+    </script>
+
     <link src="css/styles.css" rel="stylesheet">
   </head>
   <body>
