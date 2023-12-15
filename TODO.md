@@ -11,6 +11,8 @@ TODOs for each part of the assignment.
 - [ ] `GET /ads?category=2` and `GET /ads?category=4` always return empty
 - [x] Add classes and extra attributes to html tags inside templates
 - [ ] Refactor `getCategoryId()` to something more general/abstract
+- [ ] Fix favicon.ico 404 error
+- [ ] In subcategories, add a features table to each ad
 
 ## Part 2
 
