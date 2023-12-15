@@ -1,26 +1,15 @@
 var adCategories = [];
 var adSubcategoriesById = [];
 
-async function fetchData(url, callback) {
-  let myHeaders = new Headers();
-  myHeaders.append('Accept', 'application/json');
-
-  let response = await fetch(
-    url,
-    {
-      method: 'GET',
-      headers: myHeaders
-    }
-  );
-  let data = await response.json();
-  callback(data);
-}
-
 window.onload = async () => {
+
+  /* see: functions.js */
   await fetchData('https://wiki-ads.onrender.com/categories', (data) => {
     adCategories = data;
   })
+
   .then(async () => {
+    /* each category requires a separate HTTP request */
     for (let category of adCategories) {
       let id = category.id;
       await fetchData(`https://wiki-ads.onrender.com/categories/${id}/subcategories`, (data) => {
@@ -28,9 +17,11 @@ window.onload = async () => {
       });
     }
   })
+
   .catch((error) => {
     console.error(error);
   })
+
   .finally(() => {
     /* add a subcategories field to each category */
     for (let i = 0; i < adCategories.length; i++) {
@@ -38,15 +29,13 @@ window.onload = async () => {
         adCategories[i].subcategories = adSubcategoriesById[i];
       }
     }
-
     /* modify template */
     let categoriesTag = document.getElementById('ad-categories');
     let templateText = document.getElementById('template').textContent;
     let templateFunc = Handlebars.compile(templateText);
     let htmlContent = templateFunc({
-      data: adCategories
+      categories: adCategories
     });
-
     categoriesTag.innerHTML = htmlContent;
   });
 }
