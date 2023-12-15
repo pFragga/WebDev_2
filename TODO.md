@@ -8,7 +8,7 @@ TODOs for each part of the assignment.
 - [x] Join categories and subcategories list into one single object. Then pass
   it to `templateFunc`.
 - [x] Figure out why `GET /categories/:id/subcategories` returns empty arrays
-- [ ] Figure out why `/ads?category=${id}` is not a valid url
+- [ ] `GET /ads?category=2` and `GET /ads?category=4` always return empty
 - [x] Add classes and extra attributes to html tags inside templates
 
 ## Part 2
