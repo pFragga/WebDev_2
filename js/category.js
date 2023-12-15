@@ -1,15 +1,5 @@
 var categoryAds = [];
 
-/* we assume that the URL has id={category_id} as the last search parameter */
-function getCategoryId() {
-  let searchParams = new URLSearchParams(window.location.href);
-  for (const [key, value] of searchParams.entries()) {
-    if (key.endsWith('id')) {
-      return value;
-    }
-  }
-}
-
 window.onload = async () => {
   let id = getCategoryId();
 

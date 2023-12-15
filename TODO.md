@@ -10,6 +10,7 @@ TODOs for each part of the assignment.
 - [x] Figure out why `GET /categories/:id/subcategories` returns empty arrays
 - [ ] `GET /ads?category=2` and `GET /ads?category=4` always return empty
 - [x] Add classes and extra attributes to html tags inside templates
+- [ ] Refactor `getCategoryId()` to something more general/abstract
 
 ## Part 2
 
