@@ -20,6 +20,18 @@
       <h3>Περιγραφή</h3>
       <p class="desc">{{description}}</p>
       <p>Τιμή: €{{cost}}</p>
+      <h3>Χαρακτηριστικά</h3>
+      <table border="1px solid">
+        <thead></thead>
+        <tbody>
+          {{#each featuresArr}}
+          <tr>
+            <td>{{this.[0]}}</td>
+            <td>{{this.[1]}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </section>
     {{/each}}
     </script>

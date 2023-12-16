@@ -4,7 +4,7 @@ window.onload = async () => {
   let id = getCategoryId();
 
   /* see: functions.js */
-  await fetchData(`https://wiki-ads.onrender.com/ads?category=${id}`, (data) => {
+  await fetchData(`https://wiki-ads.onrender.com/ads?subcategory=${id}`, (data) => {
     subcategoryAds = data;
   })
 
@@ -13,6 +13,16 @@ window.onload = async () => {
   })
 
   .finally(() => {
+    /* extract features from each ad and make a new attribute out of them */
+    for (let ad of subcategoryAds) {
+      ad['featuresArr'] = [];
+      let features = ad.features.split('; ');
+      for (let feature of features) {
+        let namevaluePair = feature.split(': ');
+        ad['featuresArr'].push(namevaluePair);
+      }
+    }
+
     /* modify template */
     let adsTag = document.getElementById('subcategory-ads');
     let templateText = document.getElementById('template').textContent;
