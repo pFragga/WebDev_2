@@ -1,4 +1,13 @@
-img {
-  width: 300px;
-  height: 200px;
+body {
+  color: #434343;
+  background-color: #f7f7f7;
+}
+
+section {
+  display: block;
+  max-width: 55%;
+}
+
+ul {
+  list-style-type: none;
 }
