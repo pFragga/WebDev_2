@@ -16,3 +16,6 @@ TODOs for each part of the assignment.
 
 ## Part 2
 
+- [x] Create a login form in categories.html
+- [ ] Add some css styling
+
