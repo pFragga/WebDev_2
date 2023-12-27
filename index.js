@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const port = 8080;
 
-app.listen(8080);
+app.listen(port);
 
 /**
  * Serve static content from directory 'public', it will be accessible under
@@ -10,10 +11,8 @@ app.listen(8080);
  */
 app.use(express.static('public'));
 
-/* parse url-encoded content from body */
+/* middleware: enable parsing for json and url-encoded content */
 app.use(express.urlencoded({ extended: false }));
-
-/* parse application/json content from body */
 app.use(express.json());
 
 /* serve index.html as content root */

@@ -18,6 +18,10 @@ TODOs for each part of the assignment.
 
 - [x] Create a login form in categories.html
 - [x] Add some css styling
-- [ ] Implement the login service using express
 - [x] Install npm dependencies, restructure project
+- [ ] Implement the login service using express
+    - [ ] Appropriate status for server response. Inform user with `alert()`
+    - [ ] Returns uuid inside of a json object
+    - [ ] For user validation, create a samples inside 'models' directory
+- [ ] Implement the add to favourites service
 
