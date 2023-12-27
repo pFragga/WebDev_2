@@ -18,4 +18,6 @@ TODOs for each part of the assignment.
 
 - [x] Create a login form in categories.html
 - [x] Add some css styling
+- [ ] Implement the login service using express
+- [x] Install npm dependencies, restructure project
 

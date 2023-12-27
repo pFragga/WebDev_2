@@ -1,2 +1,3 @@
 api.md
-js/handlebars.js
+public/js/handlebars.js
+node_modules/
