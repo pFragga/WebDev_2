@@ -20,7 +20,8 @@ TODOs for each part of the assignment.
 - [x] Add some css styling
 - [x] Install npm dependencies, restructure project
 - [ ] Implement the login service using express
-    - [ ] Appropriate status for server response. Inform user with `alert()`
+    - [x] Appropriate status for server response. Inform user with `alert()`
+    - [x] Use javascript to submit form data, instead of the standard html way
     - [ ] Returns uuid inside of a json object
     - [ ] For user validation, create a samples inside 'models' directory
 - [ ] Implement the add to favourites service

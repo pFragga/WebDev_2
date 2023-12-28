@@ -1,5 +1,37 @@
 var categoryAds = [];
 
+/**
+ * Sends a POST request to the given url with the data from the given form.
+ */
+async function sendFormData(form, url) {
+  /* represent form inputs as json */
+  let formData = new FormData(form);
+  let temp = {};
+  for (let [key, value] of formData) {
+    temp[key] = value;
+  }
+  let json = JSON.stringify(temp);
+
+  /* configure headers and send POST request */
+  let myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  let response = await fetch(
+    url,
+    {
+      method: 'POST',
+      headers: myHeaders,
+      body: json
+    }
+  );
+
+  if (response.ok) {
+    alert('Login successful!');
+  } else {
+    alert('Login unsuccessful!');
+  }
+  form.reset();
+}
+
 window.onload = async () => {
   let id = getCategoryId();
 
@@ -21,5 +53,12 @@ window.onload = async () => {
       ads: categoryAds
     });
     adsTag.innerHTML = htmlContent;
+
+    /* form submission is done through the Fetch API */
+    let formTag = document.getElementById('login-form');
+    formTag.addEventListener('submit', (event) => {
+      event.preventDefault();
+      sendFormData(formTag, '/login-service');
+    });
   });
 };

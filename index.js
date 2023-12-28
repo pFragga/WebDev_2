@@ -25,3 +25,20 @@ app.get('/', function(req, res) {
     console.err(err);
   });
 });
+
+/* login service */
+app.post('/login-service', function(req, res) {
+  let contentType = req.header('Content-Type');
+  if (contentType === 'application/json') {
+    console.log('Showing request json data:\n', req.body);
+  } else if (contentType == 'application/x-www-form-urlencoded') {
+    console.log('Showing request urlencoded data', req.body);
+  }
+
+  /* this is only here for testing */
+  if (Math.random() > 0.5) {
+    res.status(201).send('This user is authorized to login\n');
+  } else {
+    res.status(501).send('Unauthorized user!\n');
+  }
+});
