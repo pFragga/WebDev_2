@@ -1,6 +1,6 @@
 body {
-  color: #434343;
-  background-color: #f7f7f7;
+  color: #cecece;
+  background-color: #0e1415;
 }
 
 section {
@@ -10,4 +10,11 @@ section {
 
 ul {
   list-style-type: none;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    color: #000000;
+    background-color: #f7f7f7;
+  }
 }
