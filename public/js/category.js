@@ -23,11 +23,12 @@ async function sendFormData(form, url) {
       body: json
     }
   );
+  let data = await response.json();
 
   if (response.ok) {
-    alert('Login successful!');
+    alert(`Login successful!\nUUID: ${data['sessionId']}`);
   } else {
-    alert('Login unsuccessful!');
+    alert('Login unsuccessful!\nTry again');
   }
   form.reset();
 }

@@ -22,7 +22,8 @@ TODOs for each part of the assignment.
 - [ ] Implement the login service using express
     - [x] Appropriate status for server response. Inform user with `alert()`
     - [x] Use javascript to submit form data, instead of the standard html way
-    - [ ] Returns uuid inside of a json object
-    - [ ] For user validation, create a samples inside 'models' directory
+    - [x] Returns uuid inside of a json object
+    - [ ] For user validation, create ~~samples inside 'models' directory~~
+      classes and DAOs?!?
 - [ ] Implement the add to favourites service
 

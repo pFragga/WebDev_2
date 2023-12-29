@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 const port = 8080;
 
@@ -30,15 +31,21 @@ app.get('/', function(req, res) {
 app.post('/login-service', function(req, res) {
   let contentType = req.header('Content-Type');
   if (contentType === 'application/json') {
-    console.log('Showing request json data:\n', req.body);
+    console.log('Request json data:\n', req.body);
   } else if (contentType == 'application/x-www-form-urlencoded') {
-    console.log('Showing request urlencoded data', req.body);
+    console.log('Request urlencoded data:\n', req.body);
   }
 
-  /* this is only here for testing */
-  if (Math.random() > 0.5) {
-    res.status(201).send('This user is authorized to login\n');
+  /* TODO: validate user credentials */
+  let valid = true;
+
+  if (valid) {
+    let temp = { sessionId: uuidv4() };
+
+    /* 201 Created */
+    res.status(201).send(JSON.stringify(temp));
   } else {
-    res.status(501).send('Unauthorized user!\n');
+    /* 406 Not Acceptable */
+    res.status(406).send('Unauthorized user!\n');
   }
 });
