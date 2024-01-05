@@ -4,33 +4,55 @@ var categoryAds = [];
  * Sends a POST request to the given url with the data from the given form.
  */
 async function sendFormData(form, url) {
-  /* represent form inputs as json */
-  let formData = new FormData(form);
-  let temp = {};
-  for (let [key, value] of formData) {
-    temp[key] = value;
-  }
-  let json = JSON.stringify(temp);
-
-  /* configure headers and send POST request */
-  let myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
-  let response = await fetch(
-    url,
-    {
-      method: 'POST',
-      headers: myHeaders,
-      body: json
+  try {
+    /* represent form inputs as json */
+    let formData = new FormData(form);
+    let temp = {};
+    for (let [key, value] of formData) {
+      temp[key] = value;
     }
-  );
-  let data = await response.json();
+    let json = JSON.stringify(temp);
 
-  if (response.ok) {
-    alert(`Login successful!\nUUID: ${data['sessionId']}`);
-  } else {
-    alert('Login unsuccessful!\nTry again');
+    /* configure headers and send POST request */
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    let response = await fetch(
+      url,
+      {
+        method: 'POST',
+        headers: myHeaders,
+        body: json
+      }
+    );
+
+    // Check if response has JSON content type
+    if (response.headers.get('content-type') && response.headers.get('content-type').includes('application/json')) {
+      // Try to parse JSON even for error cases
+      let data = await response.json();
+
+      if (response.ok) {
+        alert(`Login successful!\nUUID: ${data['sessionId']}`);
+      } else {
+        if (data.error) {
+          alert(`Login unsuccessful!\n${data.error}`);
+        } else {
+          alert(`Login unsuccessful!\nUnexpected error: ${response.statusText}`);
+        }
+      }
+    } else {
+      // If not JSON, handle the response based on the status code
+      if (response.status === 401) {
+        alert('Login unsuccessful!\nUnauthorized user!');
+      } else {
+        alert(`Login unsuccessful!\nUnexpected error: ${response.statusText}`);
+      }
+    }
+
+    form.reset();
+  } catch (error) {
+    console.error(error);
+    alert('An unexpected error occurred!\nPlease try again later.');
   }
-  form.reset();
 }
 
 window.onload = async () => {

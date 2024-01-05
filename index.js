@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const userDAO = require('./models/dao/usersDAO')
+const userDao = require('./models/dao/usersDAO')
 const app = express();
 const port = 8080;
 
@@ -45,12 +45,12 @@ app.post('/login-service', async function(req, res) {
 
       } else {
         /* 401 Not Acceptable */
-        res.status(401).send('Unauthorized user!\n');
+        res.status(401).json({ error: 'Unauthorized user!' });
       }
     } catch (error) {
       console.error(error);
       /* 500 server error */
-      res.status(500).send('Internal server error!\n');
+      res.status(500).json({ error: 'Internal server error!' });
     }
   } else if (contentType == 'application/x-www-form-urlencoded') {
     console.log('Request urlencoded data:\n', req.body);

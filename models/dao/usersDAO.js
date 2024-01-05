@@ -1,19 +1,17 @@
 const User = require('../model/user');  // Adjust the path based on your project structure
+const usersArr = require('../model/users');
 
 class UsersDAO {
-  constructor() {
-    this.usersArr = [];  // Assuming you're storing user instances here
-  }
 
   getAll() {
-    return this.usersArr;
+    return usersArr;
   }
 
   // Add a method to check if the user with the given username and password exists
   authenticateUser(username, password) {
-    const user = this.usersArr.find(u => u.userName === username);
+    const user = usersArr.find(u => u.userName === username);
 
-    if (user && user.isValidPassword(password)) {
+    if (user && user.userPassword === password) {
       return user;
     }
 
@@ -22,14 +20,14 @@ class UsersDAO {
 
   // Add a method to check if a username is already registered
   isRegistered(username) {
-    return this.usersArr.some(user => user.userName === username);
+    return usersArr.some(user => user.userName === username);
   }
 
   // Add a method to register a new user
   registerUser(username, password) {
     if (!this.isRegistered(username)) {
       const newUser = new User(username, password);
-      this.usersArr.push(newUser);
+      usersArr.push(newUser);
       return true;  // Registration successful
     }
 
@@ -37,4 +35,4 @@ class UsersDAO {
   }
 }
 
-module.exports = UsersDAO;
+module.exports = new UsersDAO();
