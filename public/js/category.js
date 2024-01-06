@@ -4,18 +4,18 @@ var categoryAds = [];
  * Sends a POST request to the given url with the data from the given form.
  */
 async function sendFormData(form, url) {
-  try {
-    /* represent form inputs as json */
-    let formData = new FormData(form);
-    let temp = {};
-    for (let [key, value] of formData) {
-      temp[key] = value;
-    }
-    let json = JSON.stringify(temp);
+  /* represent form inputs as json */
+  let formData = new FormData(form);
+  let temp = {};
+  for (let [key, value] of formData) {
+    temp[key.toLowerCase()] = value;
+  }
+  let json = JSON.stringify(temp);
 
-    /* configure headers and send POST request */
-    let myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+  /* configure headers and send POST request */
+  let myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  try {
     let response = await fetch(
       url,
       {
@@ -25,34 +25,21 @@ async function sendFormData(form, url) {
       }
     );
 
-    // Check if response has JSON content type
-    if (response.headers.get('content-type') && response.headers.get('content-type').includes('application/json')) {
-      // Try to parse JSON even for error cases
+    
+    
+    if (response.ok) {
       let data = await response.json();
-
-      if (response.ok) {
-        alert(`Login successful!\nUUID: ${data['sessionId']}`);
-      } else {
-        if (data.error) {
-          alert(`Login unsuccessful!\n${data.error}`);
-        } else {
-          alert(`Login unsuccessful!\nUnexpected error: ${response.statusText}`);
-        }
-      }
+      alert(`Login successful!\nUUID: ${data['sessionId']}`);
     } else {
-      // If not JSON, handle the response based on the status code
-      if (response.status === 401) {
-        alert('Login unsuccessful!\nUnauthorized user!');
-      } else {
-        alert(`Login unsuccessful!\nUnexpected error: ${response.statusText}`);
-      }
+      let errorMessage = await response.json(); // Assuming the error message is sent as JSON
+      alert(`Login unsuccessful!\n${errorMessage.error}`);
     }
-
-    form.reset();
   } catch (error) {
-    console.error(error);
-    alert('An unexpected error occurred!\nPlease try again later.');
+    console.error('Error during login:', error);
+    alert('An error occurred during login. Please try again.');
   }
+
+  form.reset();
 }
 
 window.onload = async () => {

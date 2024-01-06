@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const userDao = require('./models/dao/usersDAO')
+const UsersDAO = require('./models/dao/usersDAO');
 const app = express();
 const port = 8080;
+const usersDAO = new UsersDAO();
 
 app.listen(port);
 
@@ -29,37 +30,24 @@ app.get('/', function(req, res) {
 });
 
 /* login service */
-app.post('/login-service', async function(req, res) {
+app.post('/login-service', function(req, res) {
   let contentType = req.header('Content-Type');
   if (contentType === 'application/json') {
     console.log('Request json data:\n', req.body);
-
-    const { Username, Password } = req.body;
-    try {
-      const user = await userDao.authenticateUser(Username, Password);
-
-      if(user) {
-        let temp = { sessionId: uuidv4() };
-         /* 201 Created */
-        res.status(201).send(JSON.stringify(temp));
-
-      } else {
-        /* 401 Not Acceptable */
-        res.status(401).json({ error: 'Unauthorized user!' });
-      }
-    } catch (error) {
-      console.error(error);
-      /* 500 server error */
-      res.status(500).json({ error: 'Internal server error!' });
-    }
   } else if (contentType == 'application/x-www-form-urlencoded') {
     console.log('Request urlencoded data:\n', req.body);
-
-
-  } else {
-    /* 400 false content type */
-    res.status(400).send('Unsupported Content-Type!\n');
   }
 
- 
+  const { username, password } = req.body;
+  console.log('Received credentials:', username, password);
+
+  // Validate user credentials using the UsersDAO
+  if (usersDAO.isRegistered(username, password)) {
+    let temp = { sessionId: uuidv4() };
+    /* 201 Created */
+    res.status(201).send(JSON.stringify(temp));
+  } else {
+    /* 406 Not Acceptable */
+    res.status(406).json({ error: 'Unauthorized user!' });
+  }
 });
