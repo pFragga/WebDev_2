@@ -1,10 +1,7 @@
-const UserModel = require('./user');  // Import the User class from user.js
-
-const usersArr = [];
-
-// Populate usersArr with sample users
-for (let i = 0; i < 5; i++) {
-  usersArr[i] = new UserModel('user' + i, 'pass' + i);
+const User = require('./user');
+var usersArr = [];
+usersArr[0] = new User('exampleUser', 'examplePassword'); // Add a user for testing
+for (let i = 1; i < 5; i++) {
+  usersArr[i] = new User('user' + i, 'pass' + i);
 }
-
 module.exports = usersArr;
