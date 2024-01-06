@@ -70,5 +70,14 @@ window.onload = async () => {
       event.preventDefault();
       sendFormData(formTag, '/login-service');
     });
+    // Add event listener for "Add" button
+    document.querySelectorAll('.add-button').forEach(button => {
+      button.addEventListener('click', (event) => {
+        // Access the adId using data attribute
+        const adId = event.target.getAttribute('data-ad-id');
+        // Implement your logic to add the ad to the user's favorites
+        console.log(`Add button clicked for adId: ${this.adId}`);
+      });
+    });
   });
 };

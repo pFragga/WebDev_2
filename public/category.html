@@ -50,6 +50,21 @@
     </aside> -->
     <main id="category-ads">
       <!-- Generate HTML here -->
+      <script id="template" type="text/x-handlebars-template">
+        {{#each ads}}
+        <section class="ad">
+          <h2>{{title}}</h2>
+          <p>
+            <img src="https://wiki-ads.onrender.com/{{images.[0]}}" alt="">
+          </p>
+          <h3>Περιγραφή</h3>
+          <p class="desc">{{description}}</p>
+          <p>Τιμή: €{{cost}}</p>
+          <!-- Add button here -->
+          <button class="add-button" data-ad-id="{{this.adId}}">Add</button>
+        </section>
+        {{/each}}
+      </script>
     </main>
   </body>
 </html>
