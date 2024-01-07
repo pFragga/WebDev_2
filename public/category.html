@@ -19,11 +19,13 @@
       <h3>Περιγραφή</h3>
       <p class="desc">{{description}}</p>
       <p>Τιμή: €{{cost}}</p>
+      <button class="add-button" ad-id="{{id}}">♡</button>
     </section>
     {{/each}}
     </script>
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/login-form.css" rel="stylesheet">
+    <link href="css/add-button.css" rel="stylesheet">
   </head>
   <body>
     <h1>Αγγελίες επιλεγμένης κατηγορίας</h1>
@@ -50,21 +52,6 @@
     </aside> -->
     <main id="category-ads">
       <!-- Generate HTML here -->
-      <script id="template" type="text/x-handlebars-template">
-        {{#each ads}}
-        <section class="ad">
-          <h2>{{title}}</h2>
-          <p>
-            <img src="https://wiki-ads.onrender.com/{{images.[0]}}" alt="">
-          </p>
-          <h3>Περιγραφή</h3>
-          <p class="desc">{{description}}</p>
-          <p>Τιμή: €{{cost}}</p>
-          <!-- Add button here -->
-          <button class="add-button" data-ad-id="{{this.adId}}">Add</button>
-        </section>
-        {{/each}}
-      </script>
     </main>
   </body>
 </html>

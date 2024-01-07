@@ -26,4 +26,6 @@ TODOs for each part of the assignment.
     - [ ] For user validation, create ~~samples inside 'models' directory~~
       classes and DAOs?!?
 - [ ] Implement the add to favourites service
+    - [x] add button to each section in categories
+    - [ ] frontend - backend communication
 
