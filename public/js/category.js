@@ -8,7 +8,7 @@ async function sendFormData(form, url) {
   let formData = new FormData(form);
   let temp = {};
   for (let [key, value] of formData) {
-    temp[key.toLowerCase()] = value;
+    temp[key.toLowerCase()] = value;  // why make everything lowercase??
   }
   let json = JSON.stringify(temp);
 
@@ -24,9 +24,6 @@ async function sendFormData(form, url) {
         body: json
       }
     );
-
-    
-    
     if (response.ok) {
       let data = await response.json();
       alert(`Login successful!\nUUID: ${data['sessionId']}`);
@@ -40,6 +37,15 @@ async function sendFormData(form, url) {
   }
 
   form.reset();
+}
+
+/**
+ * Sends a POST request to the given url specifying which ad will be added to
+ * favourites.
+ */
+async function addToFavourites(id, url) {
+  // TODO: this + backend implementation of '/add-to-favourites'
+  console.log('Added ' + id + ' to favourites.');
 }
 
 window.onload = async () => {
@@ -70,13 +76,12 @@ window.onload = async () => {
       event.preventDefault();
       sendFormData(formTag, '/login-service');
     });
-    // Add event listener for "Add" button
+
+    /* add-to-favourites buttons also use the Fetch API */
     document.querySelectorAll('.add-button').forEach(button => {
       button.addEventListener('click', (event) => {
-        // Access the adId using data attribute
-        const adId = event.target.getAttribute('data-ad-id');
-        // Implement your logic to add the ad to the user's favorites
-        console.log(`Add button clicked for adId: ${this.adId}`);
+        event.preventDefault();
+        addToFavourites(button.getAttribute('ad-id'), '/add-to-favourites');
       });
     });
   });
