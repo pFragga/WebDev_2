@@ -27,7 +27,13 @@ TODOs for each part of the assignment.
       classes and DAOs
 - [x] Implement the add to favourites service
     - [x] add button to each section in categories
-    - [ ] frontend - backend communication
+    - [x] frontend - backend communication
       - [x] server side stuff (validateUser(),isAdInFavorites(),addToFavorites())
       - [x] client side intergration (addToFavorites(), getAdDataById())
+
+## Part 3
+
+~~NO MORE JS PLEASE I BEG YOU~~
+
+- [ ] favorite-ads.html
 
