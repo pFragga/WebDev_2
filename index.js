@@ -23,6 +23,7 @@ app.get('/', function(req, res) {
   var options = {
     root: path.join(__dirname, 'public')
   };
+  console.log(req.body); // this is dumb
 
   res.sendFile('index.html', options, function(err) {
     console.err(err);
@@ -60,55 +61,20 @@ app.post('/login-service', function(req, res) {
 
   const username = req.body['Username'];
   const password = req.body['Password'];
-  console.log('Received credentials:', username, password);
 
-  // Validate user credentials using the UsersDAO
-  if (usersDAO.isRegistered(username, password)) {
-    let temp = { sessionId: uuidv4() };
-    /* 201 Created */
-    res.status(201).send(JSON.stringify(temp));
+  if (usersDAO.getUser(username, password)) {
+    if (!usersDAO.isActive(username, password)) {
+      let uuid = uuidv4();
+      usersDAO.setActive(username, password, uuid);
+      /* 201 Created: user logged in */
+      res.status(201).send(JSON.stringify({ sessionId: uuid }));
+    } else {
+      /* 202 Accepted: user already logged in */
+      res.status(202).send(JSON.stringify({ msg: 'Already logged in.' }));
+    }
   } else {
-    /* 406 Not Acceptable */
-    res.status(406).json({ error: 'Unauthorized user!' });
+    /* 401 Unauthorized: could not verify user */
+    /* see: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes */
+    res.status(401).send(JSON.stringify({ error: 'Unauthorized user!' }));
   }
 });
-
-// Validation function for user identification
-function validateUser(username, sessionId) {
-  // Find the user in the in-memory array
-  const user = usersArr.find(u => u.userName === username);
-  
-  // Check if the user exists and the provided sessionId matches the stored sessionId
-  return user && user.sessionId === sessionId;
-}
-
-// Function to check if the ad is already in the user's favorites
-function isAdInFavorites(username, adCode) {
-  // Find the user in the in-memory array
-  const userIndex = usersArr.findIndex(u => u.userName === username);
-
-  // Check if the user exists and if the ad is in favorites
-  return userIndex !== -1 && usersArr[userIndex].favorites.some(ad => ad.adCode === adCode);
-}
-
-// Function to add the ad to the user's favorites
-function addToFavorites(username, adCode, title, description, cost, imageUrl) {
-  // Find the user in the in-memory array
-  const userIndex = usersArr.findIndex(u => u.userName === username);
-
-  // Check if the user exists
-  if (userIndex !== -1) {
-    // Check if the ad is not already in favorites
-    const adIndex = usersArr[userIndex].favorites.findIndex(ad => ad.adCode === adCode);
-    if (adIndex === -1) {
-      // Add the ad to the user's favorites
-      usersArr[userIndex].favorites.push({
-        adCode,
-        title,
-        description,
-        cost,
-        imageUrl,
-      });
-    }
-  }
-}

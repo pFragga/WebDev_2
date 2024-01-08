@@ -1,3 +1,6 @@
+/* this is terrible design choice that I am conciously making. */
+var username = '';
+var uuid = '';
 var categoryAds = [];
 
 /**
@@ -8,14 +11,17 @@ async function sendFormData(form, url) {
   let formData = new FormData(form);
   let temp = {};
   for (let [key, value] of formData) {
+    if (key == 'Username') {
+      username = value;
+    }
     temp[key] = value;
   }
   let json = JSON.stringify(temp);
 
   /* configure headers and send POST request */
-  let myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
   try {
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
     let response = await fetch(
       url,
       {
@@ -24,16 +30,21 @@ async function sendFormData(form, url) {
         body: json
       }
     );
+
+    /* handle server response */
+    let data = await response.json();
     if (response.ok) {
-      let data = await response.json();
-      alert(`Login successful!\nUUID: ${data['sessionId']}`);
+      uuid = data.sessionId;
+      if (uuid) {
+        alert(`Login successful!\nUUID: ${uuid}`);
+      } else {
+        alert(data.msg);
+      }
     } else {
-      let errorMessage = await response.json(); // Assuming the error message is sent as JSON
-      alert(`Login unsuccessful!\n${errorMessage.error}`);
+      alert(`Login unsuccessful!\n${data.error}`);
     }
   } catch (error) {
-    console.error('Error during login:', error);
-    alert('An error occurred during login. Please try again.');
+    console.error(error);
   }
 
   form.reset();
