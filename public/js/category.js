@@ -8,7 +8,7 @@ async function sendFormData(form, url) {
   let formData = new FormData(form);
   let temp = {};
   for (let [key, value] of formData) {
-    temp[key.toLowerCase()] = value;  // why make everything lowercase??
+    temp[key] = value;
   }
   let json = JSON.stringify(temp);
 

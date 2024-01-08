@@ -58,7 +58,8 @@ app.post('/login-service', function(req, res) {
     console.log('Request urlencoded data:\n', req.body);
   }
 
-  const { username, password } = req.body;
+  const username = req.body['Username'];
+  const password = req.body['Password'];
   console.log('Received credentials:', username, password);
 
   // Validate user credentials using the UsersDAO
