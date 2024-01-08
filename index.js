@@ -111,3 +111,4 @@ function addToFavorites(username, adCode, title, description, cost, imageUrl) {
     }
   }
 }
+
