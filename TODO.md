@@ -28,4 +28,6 @@ TODOs for each part of the assignment.
 - [ ] Implement the add to favourites service
     - [x] add button to each section in categories
     - [ ] frontend - backend communication
+      - [ ] server side stuff (validateUser(),isAdInFavorites(),addToFavorites())
+      - [ ] client side intergration (addToFavorites(), getAdDataById())
 
