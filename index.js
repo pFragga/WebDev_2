@@ -30,24 +30,40 @@ app.get('/', function(req, res) {
   });
 });
 
-// AFS Add to Favorites
+/* add-to-favorites service */
 app.post('/add-to-favorites', function(req,res) {
-  let {adCode,title,description,cost,imageUrl,username,sessionId} = req.body;
+  let contentType = req.header('Content-Type');
+  if (contentType === 'application/json') {
+    console.log('Request json data:\n', req.body);
+  } else if (contentType == 'application/x-www-form-urlencoded') {
+    console.log('Request urlencoded data:\n', req.body);
+  }
 
-  // Validate user identification
-  if (!validateUser(username, sessionId)) {
-    /* 401 Unauthorized */
-    return res.status(401).json({ error: 'Please log in to add to favorites.' });
+  const data = req.body;
+
+  /* is the user logged in? */
+  let user = usersDAO.getUserBySessionId(data.sessionId);
+  if (user) {
+    /* does the user's favorites list already contain the selected ad? */
+    if (user.favorites.every((ad) => ad.id != data.id)) {
+      user.favorites.push({
+        id: data.id,
+        title: data.title,
+        description: data.description,
+        cost: data.cost,
+        imageUrl: data.imageUrl
+      });
+      res.status(201).send(JSON.stringify({ msg: `Added ad #${data.id} to favorites.` }));
+    } else {
+      res.status(202).send(JSON.stringify({ msg: `Ad #${data.id} already in favorites.` }));
+    }
+  } else {
+    res.status(401).send(JSON.stringify({ error: 'You need to be logged in.' }));
   }
-  // Check if the ad is already in the favorites list
-  if (isAdInFavorites(username, adCode)) {
-    /* 409 Conflict - Already in favorites */
-    return res.status(409).json({ error: 'Ad is already in favorites.' });
-  }
-  // Add the ad to the favorites list (you need to implement this function)
-  addToFavorites(username, adCode, title, description, cost, imageUrl);
-  /* 201 Created - Successfully added to favorites */
-  res.status(201).json({ message: 'Ad added to favorites successfully.' });
+
+  /* ensure the user's favorites list changes */
+  console.log(`${user.userName}'s favorites:`);
+  user.favorites.forEach((item) => console.log(item));
 });
 
 /* login service */

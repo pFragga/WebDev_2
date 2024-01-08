@@ -25,9 +25,9 @@ TODOs for each part of the assignment.
     - [x] Returns uuid inside of a json object
     - [x] For user validation, create ~~samples inside 'models' directory~~
       classes and DAOs
-- [ ] Implement the add to favourites service
+- [x] Implement the add to favourites service
     - [x] add button to each section in categories
     - [ ] frontend - backend communication
-      - [ ] server side stuff (validateUser(),isAdInFavorites(),addToFavorites())
+      - [x] server side stuff (validateUser(),isAdInFavorites(),addToFavorites())
       - [x] client side intergration (addToFavorites(), getAdDataById())
 
