@@ -29,5 +29,5 @@ TODOs for each part of the assignment.
     - [x] add button to each section in categories
     - [ ] frontend - backend communication
       - [ ] server side stuff (validateUser(),isAdInFavorites(),addToFavorites())
-      - [ ] client side intergration (addToFavorites(), getAdDataById())
+      - [x] client side intergration (addToFavorites(), getAdDataById())
 

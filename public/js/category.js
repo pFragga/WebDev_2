@@ -55,48 +55,40 @@ async function sendFormData(form, url) {
  * favorites.
  */
 async function addToFavorites(id, url) {
-  console.log('Added ' + id + ' to favorites.');
-  const adData = getAdDataById(adId); // You need to implement this function
+  /* get data from the category ad with the provided id */
+  const adData = categoryAds.find((ad) => ad.id == id);
 
-  // Fetch API to call the AFS service
+  /* send POST request with ad data together with username and uuid */
   try {
     let response = await fetch(
-      '/add-to-favorites',
+      url,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          adCode: adData.adCode,
+          id: adData.id,
           title: adData.title,
           description: adData.description,
           cost: adData.cost,
-          imageUrl: adData.imageUrl,
-          username: username, // Provide the actual username here
-          sessionId: sessionId, // Provide the actual sessionId here
+          imageUrl: adData.images[0],
+          username: username,
+          sessionId: uuid,
         }),
       }
     );
+
+    /* handle server response */
+    let data = await response.json();
     if (response.ok) {
-      let data = await response.json();
-      console.log(data.message);
+      alert(data.msg);
     } else {
-      let errorMessage = await response.json();
-      console.error(errorMessage.error);
+      alert(data.error);
     }
   } catch (error) {
     console.error('Error during adding to favorites:', error);
   }
-}
-
-// Function to get ad data by adId
-function getAdDataById(adId) {
-  // Find the ad in the categoryAds array
-  const ad = categoryAds.find(a => a.adId === adId);
-
-  // Return the ad data or null if not found
-  return ad || null;
 }
 
 window.onload = async () => {
@@ -131,10 +123,11 @@ window.onload = async () => {
     /* add-to-favorites buttons also use the Fetch API */
     document.querySelectorAll('.add-button').forEach(button => {
       button.addEventListener('click', async (event) => {
+        event.preventDefault();
         // Access the adId using data attribute
         const adId = event.target.getAttribute('ad-id');
         // Implement your logic to add the ad to the user's favorites
-        await addToFavorites(adId);
+        await addToFavorites(adId, '/add-to-favorites');
       });
     });
   });
