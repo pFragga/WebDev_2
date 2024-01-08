@@ -41,11 +41,10 @@ async function sendFormData(form, url) {
 
 /**
  * Sends a POST request to the given url specifying which ad will be added to
- * favourites.
+ * favorites.
  */
 async function addToFavorites(id, url) {
-  // TODO: this + backend implementation of '/add-to-favourites'
-  console.log('Added ' + id + ' to favourites.');
+  console.log('Added ' + id + ' to favorites.');
   const adData = getAdDataById(adId); // You need to implement this function
 
   // Fetch API to call the AFS service
@@ -79,6 +78,7 @@ async function addToFavorites(id, url) {
     console.error('Error during adding to favorites:', error);
   }
 }
+
 // Function to get ad data by adId
 function getAdDataById(adId) {
   // Find the ad in the categoryAds array
@@ -117,7 +117,7 @@ window.onload = async () => {
       sendFormData(formTag, '/login-service');
     });
 
-    /* add-to-favourites buttons also use the Fetch API */
+    /* add-to-favorites buttons also use the Fetch API */
     document.querySelectorAll('.add-button').forEach(button => {
       button.addEventListener('click', async (event) => {
         // Access the adId using data attribute

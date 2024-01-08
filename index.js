@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
   });
 });
 
-// AFS Add to Favourites
+// AFS Add to Favorites
 app.post('/add-to-favorites', function(req,res) {
   let {adCode,title,description,cost,imageUrl,username,sessionId} = req.body;
 
