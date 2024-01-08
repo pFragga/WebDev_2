@@ -87,7 +87,7 @@ async function addToFavorites(id, url) {
       alert(data.error);
     }
   } catch (error) {
-    console.error('Error during adding to favorites:', error);
+    console.error('Error in addToFavorites:', error);
   }
 }
 

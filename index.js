@@ -53,6 +53,11 @@ app.post('/add-to-favorites', function(req,res) {
         cost: data.cost,
         imageUrl: data.imageUrl
       });
+
+      /* ensure the user's favorites list changes */
+      console.log(`${user.userName}'s favorites:`);
+      user.favorites.forEach((item) => console.log(item));
+
       res.status(201).send(JSON.stringify({ msg: `Added ad #${data.id} to favorites.` }));
     } else {
       res.status(202).send(JSON.stringify({ msg: `Ad #${data.id} already in favorites.` }));
@@ -60,10 +65,6 @@ app.post('/add-to-favorites', function(req,res) {
   } else {
     res.status(401).send(JSON.stringify({ error: 'You need to be logged in.' }));
   }
-
-  /* ensure the user's favorites list changes */
-  console.log(`${user.userName}'s favorites:`);
-  user.favorites.forEach((item) => console.log(item));
 });
 
 /* login service */
