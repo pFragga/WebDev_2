@@ -44,4 +44,6 @@ TODOs for each part of the assignment.
     - [x] Access the user's favorites via ~~GET~~ POST request to '/favorites'
     - [x] '/favorites' in index.js resonds with the user's favorites list, upon
       validating `username` and `sessionId`
+- [ ] Abstract all POST request into a single function, then include it in
+  functions.js
 
