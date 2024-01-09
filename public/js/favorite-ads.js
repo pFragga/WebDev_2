@@ -39,7 +39,7 @@ window.onload = async () => {
   let templateText = document.getElementById('template').textContent;
   let templateFunc = Handlebars.compile(templateText);
   let htmlContent = templateFunc({
-    ads: favorites
+    favoriteAds: favorites
   });
   favoritesTag.innerHTML = htmlContent;
 };
