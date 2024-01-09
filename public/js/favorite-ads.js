@@ -35,11 +35,11 @@ window.onload = async () => {
   let favorites = await getUserFavorites(username, sessionId, '/favorites');
 
   /* modify template */
-  let favoritesTag = document.getElementById('favorites');
+  let favoritesTag = document.getElementById('favorite-ads');
   let templateText = document.getElementById('template').textContent;
   let templateFunc = Handlebars.compile(templateText);
   let htmlContent = templateFunc({
-    ads: favorites
+    favoriteAds: favorites
   });
   favoritesTag.innerHTML = htmlContent;
 };
