@@ -1,0 +1,33 @@
+<html lang="el-GR">
+  <head>
+    <title>Favorite Ads</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js" type="text/javascript"></script>
+    <script src="js/functions.js" type="text/javascript"></script>
+    <script src="js/favorite-ads.js" type="text/javascript"></script> 
+    <link href="css/styles.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <h1>Αγαπημένες Αγγελίες</h1>
+
+    <main id="favorite-ads">
+      <!-- Generated HTML for favorite ads will be inserted here -->
+    </main>
+
+    <script id="template" type="text/x-handlebars-template">
+      {{#each favoriteAds}}
+        <section class="ad">
+          <h2>{{title}}</h2>
+          <p>
+            <img src="{{imageUrl}}" alt="">
+          </p>
+          <h3>Περιγραφή</h3>
+          <p class="desc">{{description}}</p>
+          <p>Τιμή: €{{cost}}</p>
+        </section>
+      {{/each}}
+    </script>
+  </body>
+</html>
