@@ -1,7 +1,7 @@
 /* this file is for functions that are shared between html pages */
 
 /**
- * Sends an HTTP request to the provided URL and receives the data in JSON
+ * Sends an GET request to the provided URL and receives the data in JSON
  * format. All other operations on that data can be abstracted into the
  * callback function.
  */

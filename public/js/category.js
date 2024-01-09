@@ -4,10 +4,11 @@ var uuid = '';
 var categoryAds = [];
 
 /**
- * Sends a POST request to the given url with the data from the given form.
+ * Sends a POST request to the given url with the credentials from the given
+ * form. The url's response determines whether the login was successful or not.
  */
-async function sendFormData(form, url) {
-  /* represent form inputs as json */
+async function attemptLogin(form, url) {
+  /* represent credentials as json */
   let formData = new FormData(form);
   let temp = {};
   for (let [key, value] of formData) {
@@ -18,8 +19,8 @@ async function sendFormData(form, url) {
   }
   let json = JSON.stringify(temp);
 
-  /* configure headers and send POST request */
   try {
+    /* configure headers and send POST request */
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     let response = await fetch(
@@ -58,8 +59,8 @@ async function addToFavorites(id, url) {
   /* get data from the category ad with the provided id */
   const adData = categoryAds.find((ad) => ad.id == id);
 
-  /* send POST request with ad data together with username and uuid */
   try {
+    /* send POST request with ad data together with username and uuid */
     let response = await fetch(
       url,
       {
@@ -117,7 +118,7 @@ window.onload = async () => {
     let formTag = document.getElementById('login-form');
     formTag.addEventListener('submit', (event) => {
       event.preventDefault();
-      sendFormData(formTag, '/login-service');
+      attemptLogin(formTag, '/login-service');
     });
 
     /* add-to-favorites buttons also use the Fetch API */
