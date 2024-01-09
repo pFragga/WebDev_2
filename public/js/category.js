@@ -92,7 +92,7 @@ async function addToFavorites(id, url) {
 }
 
 window.onload = async () => {
-  let id = getCategoryId();
+  let id = getUrlParam('id');
 
   /* see: functions.js */
   await fetchData(`https://wiki-ads.onrender.com/ads?category=${id}`, (data) => {

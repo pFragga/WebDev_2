@@ -10,7 +10,7 @@ TODOs for each part of the assignment.
 - [x] Figure out why `GET /categories/:id/subcategories` returns empty arrays
 - [x] `GET /ads?category=2` and `GET /ads?category=4` always return empty
 - [x] Add classes and extra attributes to html tags inside templates
-- [ ] Refactor `getCategoryId()` to something more general/abstract
+- [x] Refactor `getCategoryId()` to something more general/abstract
 - [ ] Fix favicon.ico 404 error
 - [x] In subcategories, add a features table to each ad
 
@@ -30,6 +30,7 @@ TODOs for each part of the assignment.
     - [x] frontend - backend communication
       - [x] server side stuff (validateUser(),isAdInFavorites(),addToFavorites())
       - [x] client side intergration (addToFavorites(), getAdDataById())
+- [ ] Fix bug where user can be logged in as more that one person
 
 ## Part 3
 

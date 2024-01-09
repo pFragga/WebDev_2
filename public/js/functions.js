@@ -20,11 +20,14 @@ async function fetchData(url, callback) {
   callback(data);
 }
 
-/* we assume that the URL has id={category_id} as the last search parameter */
-function getCategoryId() {
+/**
+ * A more general way of getting url search parameters. Just pass in the
+ * parameter you're looking for.
+ */
+function getUrlParam(param) {
   let searchParams = new URLSearchParams(window.location.href);
   for (const [key, value] of searchParams.entries()) {
-    if (key.endsWith('id')) {
+    if (key.endsWith(param)) {
       return value;
     }
   }

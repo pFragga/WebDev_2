@@ -1,7 +1,7 @@
 var subcategoryAds = [];
 
 window.onload = async () => {
-  let id = getCategoryId();
+  let id = getUrlParam('id');
 
   /* see: functions.js */
   await fetchData(`https://wiki-ads.onrender.com/ads?subcategory=${id}`, (data) => {
