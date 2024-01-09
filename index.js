@@ -95,3 +95,23 @@ app.post('/login-service', function(req, res) {
     res.status(401).send(JSON.stringify({ error: 'Unauthorized user!' }));
   }
 });
+
+/* favorites retrieval service */
+app.post('/favorites', function(req, res) {
+  let contentType = req.header('Content-Type');
+  if (contentType === 'application/json') {
+    console.log('Request json data:\n', req.body);
+  } else if (contentType == 'application/x-www-form-urlencoded') {
+    console.log('Request urlencoded data:\n', req.body);
+  }
+
+  const username = req.body['username'];
+  const sessionId = req.body['sessionId'];
+
+  let user = usersDAO.getUserBySessionId(sessionId);
+  if (user) {
+    res.status(200).send(JSON.stringify({ favorites: user.favorites }));
+  } else {
+    res.status(404).send(JSON.stringify({ error: 'Could not get user favorites.' }));
+  }
+});

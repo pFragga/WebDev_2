@@ -36,12 +36,12 @@ TODOs for each part of the assignment.
 
 ~~NO MORE JS PLEASE I BEG YOU~~
 
-- [ ] Favorites Retrieval Service - FRS
-    - [ ] Access the user's favorites via GET request to '/favorites'
-    - [ ] '/favorites' in index.js resonds with the user's favorites list
-      (json), upon validating `username` and `sessionId`
 - [ ] favorite-ads.html
     - [x] link from category.html `<header>`
     - [ ] the header mentioned looks ugly, needs more css styling
 - [x] `username` and `sessionId` from category.html encoded as URL parameters
+- [x] Favorites Retrieval Service - FRS
+    - [x] Access the user's favorites via ~~GET~~ POST request to '/favorites'
+    - [x] '/favorites' in index.js resonds with the user's favorites list, upon
+      validating `username` and `sessionId`
 
