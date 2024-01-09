@@ -36,7 +36,6 @@ TODOs for each part of the assignment.
 
 ~~NO MORE JS PLEASE I BEG YOU~~
 
-- [ ] `username` and `sessionId` from category.html encoded as URL parameters
 - [ ] Favorites Retrieval Service - FRS
     - [ ] Access the user's favorites via GET request to '/favorites'
     - [ ] '/favorites' in index.js resonds with the user's favorites list
@@ -44,4 +43,5 @@ TODOs for each part of the assignment.
 - [ ] favorite-ads.html
     - [x] link from category.html `<header>`
     - [ ] the header mentioned looks ugly, needs more css styling
+- [x] `username` and `sessionId` from category.html encoded as URL parameters
 

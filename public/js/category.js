@@ -131,5 +131,23 @@ window.onload = async () => {
         await addToFavorites(adId, '/add-to-favorites');
       });
     });
+
+    /* append username and sessionId to the href that links to favorites */
+    let favlink = document.getElementById('fav-link');
+    favlink.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (username && uuid) {
+        let href = favlink.getAttribute('href');
+        let suffix = `?username=${username}&sessionId=${uuid}`;
+
+        /* don't add the suffix if it has already been added */
+        if (!href.endsWith(suffix)) {
+          favlink.setAttribute('href', href + suffix); // still bug-prone though
+        }
+        window.location = favlink.getAttribute('href');
+      } else {
+        alert('Please log in first.');
+      }
+    });
   });
 };
