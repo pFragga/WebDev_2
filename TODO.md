@@ -36,9 +36,9 @@ TODOs for each part of the assignment.
 
 ~~NO MORE JS PLEASE I BEG YOU~~
 
-- [ ] favorite-ads.html
+- [x] favorite-ads.html
     - [x] link from category.html `<header>`
-    - [ ] the header mentioned looks ugly, needs more css styling
+    - [x] the header mentioned looks ugly, needs more css styling
 - [x] `username` and `sessionId` from category.html encoded as URL parameters
 - [x] Favorites Retrieval Service - FRS
     - [x] Access the user's favorites via ~~GET~~ POST request to '/favorites'

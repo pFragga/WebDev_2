@@ -1,0 +1,38 @@
+/*
+ * Largely inspired by the example shown here:
+ * https://www.w3schools.com/howto/howto_css_login_form_navbar.asp
+ */
+
+* { box-sizing: border-box; }
+
+nav {
+  overflow: hidden;
+  background-color: #cd974b;
+}
+
+nav a {
+  float: left;
+  display: block;
+  color: #0e1415;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+nav a:hover {
+  color: #293334;
+}
+
+@media (prefers-color-scheme: light) {
+  nav {
+    background-color: #007acc;
+  }
+
+  nav a {
+    color: #000000;
+  }
+
+  nav a:hover {
+    color: #bfdbfe;
+  }
+}
