@@ -25,10 +25,9 @@ async function fetchData(url, callback) {
  * parameter you're looking for.
  */
 function getUrlParam(param) {
-  let searchParams = new URLSearchParams(window.location.href);
-  for (const [key, value] of searchParams.entries()) {
-    if (key.endsWith(param)) {
-      return value;
+  let searchParams = new URLSearchParams(window.location.search);
+  return searchParams.get(param);
+}
     }
   }
 }
