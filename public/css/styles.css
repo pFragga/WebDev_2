@@ -12,9 +12,25 @@ ul {
   list-style-type: none;
 }
 
+section a {
+  color: #95cb82;
+}
+
+section a:hover {
+  color: #cd974b;
+}
+
 @media (prefers-color-scheme: light) {
   body {
     color: #000000;
     background-color: #f7f7f7;
+  }
+
+  section a {
+    color: #448c27;
+  }
+
+  section a:hover {
+    color: #007acc;
   }
 }
